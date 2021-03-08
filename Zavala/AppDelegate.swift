@@ -463,47 +463,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		builder.remove(menu: .openRecent)
 		
 		// Application Menu
-		let appMenu = UIMenu(title: "", options: .displayInline, children: [showPreferences, checkForUpdates])
+        let appMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.showPreferences, checkForUpdates])
 		builder.insertSibling(appMenu, afterMenu: .about)
 		
 		// File Menu
-		let syncMenu = UIMenu(title: "", options: .displayInline, children: [sync])
+        let syncMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.sync])
 		builder.insertChild(syncMenu, atStartOfMenu: .file)
 
-		let importExportMenu = UIMenu(title: "", options: .displayInline, children: [importOPMLCommand, exportMarkdownCommand, exportOPMLCommand])
+        let importExportMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.importOPMLCommand, UIKeyCommand.exportMarkdownCommand, UIKeyCommand.exportOPMLCommand])
 		builder.insertChild(importExportMenu, atStartOfMenu: .file)
 
-		let newWindowMenu = UIMenu(title: "", options: .displayInline, children: [newWindowCommand])
+        let newWindowMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.newWindowCommand])
 		builder.insertChild(newWindowMenu, atStartOfMenu: .file)
 
-		let newItemsMenu = UIMenu(title: "", options: .displayInline, children: [newOutlineCommand])
+        let newItemsMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.newOutlineCommand])
 		builder.insertChild(newItemsMenu, atStartOfMenu: .file)
 
-		let shareMenu = UIMenu(title: "", options: .displayInline, children: [sendCopyCommand])
+        let shareMenu = UIMenu(title: "", options: .displayInline, children: [sendCopyCommand])
 		builder.insertChild(shareMenu, atEndOfMenu: .file)
 
 		// Edit
-		let linkMenu = UIMenu(title: "", options: .displayInline, children: [linkCommand])
+        let linkMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.linkCommand])
 		builder.insertSibling(linkMenu, afterMenu: .standardEdit)
 
 		// Format
 		builder.remove(menu: .format)
-		let formatMenu = UIMenu(title: L10n.format, children: [toggleBoldCommand, toggleItalicsCommand])
+        let formatMenu = UIMenu(title: L10n.format, children: [UIKeyCommand.toggleBoldCommand, UIKeyCommand.toggleItalicsCommand])
 		builder.insertSibling(formatMenu, afterMenu: .edit)
 
-		// View Menu
-		let expandCollapseMenu = UIMenu(title: "",
-										options: .displayInline,
-										children: [expandAllInOutlineCommand, expandAllCommand, expandCommand, collapseAllInOutlineCommand, collapseAllCommand, collapseCommand])
-		builder.insertChild(expandCollapseMenu, atStartOfMenu: .view)
-		let toggleFilterOutlineMenu = UIMenu(title: "", options: .displayInline, children: [toggleOutlineFilterCommand, toggleOutlineHideNotesCommand])
+        // View Menu
+        let expandCollapseMenu = UIMenu(title: "",
+                                        options: .displayInline,
+                                        children: [UIKeyCommand.expandAllInOutlineCommand, UIKeyCommand.expandAllCommand, UIKeyCommand.expandCommand, UIKeyCommand.collapseAllInOutlineCommand, UIKeyCommand.collapseAllCommand, UIKeyCommand.collapseCommand])
+        builder.insertChild(expandCollapseMenu, atStartOfMenu: .view)
+        let toggleFilterOutlineMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleOutlineFilterCommand, UIKeyCommand.toggleOutlineHideNotesCommand])
 		builder.insertChild(toggleFilterOutlineMenu, atStartOfMenu: .view)
-		let toggleSidebarMenu = UIMenu(title: "", options: .displayInline, children: [toggleSidebarCommand])
+        let toggleSidebarMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleSidebarCommand])
 		builder.insertSibling(toggleSidebarMenu, afterMenu: .toolbar)
 		
 		// Outline Menu
-		let completeMenu = UIMenu(title: "", options: .displayInline, children: [toggleCompleteRowsCommand, deleteCompletedRowsCommand, createRowNotesCommand, deleteRowNotesCommand])
-		let mainOutlineMenu = UIMenu(title: "", options: .displayInline, children: [insertRowCommand, createRowCommand, splitRowCommand, indentRowsCommand, outdentRowsCommand])
+        let completeMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleCompleteRowsCommand, UIKeyCommand.deleteCompletedRowsCommand, UIKeyCommand.createRowNotesCommand, UIKeyCommand.deleteRowNotesCommand])
+        let mainOutlineMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.insertRowCommand, UIKeyCommand.createRowCommand, UIKeyCommand.splitRowCommand, UIKeyCommand.indentRowsCommand, UIKeyCommand.outdentRowsCommand])
 		let outlineMenu = UIMenu(title: L10n.outline, children: [mainOutlineMenu, completeMenu])
 		builder.insertSibling(outlineMenu, afterMenu: .view)
 
