@@ -17,273 +17,107 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		#else
 		var menuKeyCommands = [UIKeyCommand]()
 		
-		menuKeyCommands.append(showPreferences)
+		menuKeyCommands.append(.showPreferences)
 		
 		if AccountManager.shared.isSyncAvailable {
-			menuKeyCommands.append(sync)
+			menuKeyCommands.append(.sync)
 		}
 
 		if !(mainSplitViewController?.isOutlineFunctionsUnavailable ?? true) {
 			if mainSplitViewController?.isOutlineFiltered ?? false {
-				menuKeyCommands.append(showCompletedCommand)
+				menuKeyCommands.append(.showCompletedCommand)
 			} else {
-				menuKeyCommands.append(hideCompletedCommand)
+				menuKeyCommands.append(.hideCompletedCommand)
 			}
 			if mainSplitViewController?.isOutlineNotesHidden ?? false {
-				menuKeyCommands.append(showNotesCommand)
+				menuKeyCommands.append(.showNotesCommand)
 			} else {
-				menuKeyCommands.append(hideNotesCommand)
+				menuKeyCommands.append(.hideNotesCommand)
 			}
 		}
 		
-		menuKeyCommands.append(newOutlineCommand)
-		menuKeyCommands.append(importOPMLCommand)
+		menuKeyCommands.append(.newOutlineCommand)
+		menuKeyCommands.append(.importOPMLCommand)
 		
 		if !(mainSplitViewController?.isExportOutlineUnavailable ?? true) {
-			menuKeyCommands.append(exportMarkdownCommand)
-			menuKeyCommands.append(exportOPMLCommand)
+			menuKeyCommands.append(.exportMarkdownCommand)
+			menuKeyCommands.append(.exportOPMLCommand)
 		}
 		
-		menuKeyCommands.append(newWindowCommand)
-		menuKeyCommands.append(toggleSidebarCommand)
+		menuKeyCommands.append(.newWindowCommand)
+		menuKeyCommands.append(.toggleSidebarCommand)
 		
 		if !(mainSplitViewController?.isInsertRowUnavailable ?? true) {
-			menuKeyCommands.append(insertRowCommand)
+			menuKeyCommands.append(.insertRowCommand)
 		}
 		
 		if !(mainSplitViewController?.isCreateRowUnavailable ?? true) {
-			menuKeyCommands.append(createRowCommand)
+			menuKeyCommands.append(.createRowCommand)
 		}
 		
 		if !(mainSplitViewController?.isIndentRowsUnavailable ?? true) {
-			menuKeyCommands.append(indentRowsCommand)
+			menuKeyCommands.append(.indentRowsCommand)
 		}
 		
 		if !(mainSplitViewController?.isOutdentRowsUnavailable ?? true) {
-			menuKeyCommands.append(outdentRowsCommand)
+			menuKeyCommands.append(.outdentRowsCommand)
 		}
 		
 		if !(mainSplitViewController?.isToggleRowCompleteUnavailable ?? true) {
 			if mainSplitViewController?.isCompleteRowsAvailable ?? false {
-				menuKeyCommands.append(completeRowsCommand)
+				menuKeyCommands.append(.completeRowsCommand)
 			} else {
-				menuKeyCommands.append(uncompleteRowsCommand)
+				menuKeyCommands.append(.uncompleteRowsCommand)
 			}
 		}
 		
 		if !(mainSplitViewController?.isCreateRowNotesUnavailable ?? true) {
-			menuKeyCommands.append(createRowNotesCommand)
+			menuKeyCommands.append(.createRowNotesCommand)
 		}
 
 		if !(mainSplitViewController?.isDeleteRowNotesUnavailable ?? true) {
-			menuKeyCommands.append(deleteRowNotesCommand)
+			menuKeyCommands.append(.deleteRowNotesCommand)
 		}
 
 		if !(mainSplitViewController?.isExpandAllInOutlineUnavailable ?? true) {
-			menuKeyCommands.append(expandAllInOutlineCommand)
+			menuKeyCommands.append(.expandAllInOutlineCommand)
 		}
 		
 		if !(mainSplitViewController?.isCollapseAllInOutlineUnavailable ?? true) {
-			menuKeyCommands.append(collapseAllInOutlineCommand)
+			menuKeyCommands.append(.collapseAllInOutlineCommand)
 		}
 
 		if !(mainSplitViewController?.isExpandAllUnavailable ?? true) {
-			menuKeyCommands.append(expandAllCommand)
+			menuKeyCommands.append(.expandAllCommand)
 		}
 		
 		if !(mainSplitViewController?.isCollapseAllUnavailable ?? true) {
-			menuKeyCommands.append(collapseAllCommand)
+			menuKeyCommands.append(.collapseAllCommand)
 		}
 		
 		if !(mainSplitViewController?.isExpandUnavailable ?? true) {
-			menuKeyCommands.append(expandCommand)
+			menuKeyCommands.append(.expandCommand)
 		}
 		
 		if !(mainSplitViewController?.isCollapseUnavailable ?? true) {
-			menuKeyCommands.append(collapseCommand)
+			menuKeyCommands.append(.collapseCommand)
 		}
 		
 		if !(mainSplitViewController?.isDeleteCompletedRowsUnavailable ?? true) {
-			menuKeyCommands.append(deleteCompletedRowsCommand)
+			menuKeyCommands.append(.deleteCompletedRowsCommand)
 		}
 
 		return menuKeyCommands
 		#endif
 	}
 		
-	let showPreferences = UIKeyCommand(title: L10n.preferences,
-										 action: #selector(showPreferences(_:)),
-										 input: ",",
-										 modifierFlags: [.command])
+	
 	
 	#if targetEnvironment(macCatalyst)
 	let checkForUpdates = UICommand(title: L10n.checkForUpdates, action: #selector(checkForUpdates(_:)))
 	#endif
 	
-	let sync = UIKeyCommand(title: L10n.sync,
-							action: #selector(syncCommand(_:)),
-							input: "r",
-							modifierFlags: [.command])
 	
-	let exportOPMLCommand = UIKeyCommand(title: L10n.exportOPML,
-										 action: #selector(exportOPMLCommand(_:)),
-										 input: "e",
-										 modifierFlags: [.shift, .command])
-	
-	let exportMarkdownCommand = UIKeyCommand(title: L10n.exportMarkdown,
-											 action: #selector(exportMarkdownCommand(_:)),
-											 input: "e",
-											 modifierFlags: [.control, .command])
-	
-	let importOPMLCommand = UIKeyCommand(title: L10n.importOPML,
-										 action: #selector(importOPMLCommand(_:)),
-										 input: "i",
-										 modifierFlags: [.shift, .command])
-	
-	let newWindowCommand = UIKeyCommand(title: L10n.newWindow,
-										action: #selector(newWindow(_:)),
-										input: "n",
-										modifierFlags: [.alternate, .command])
-	
-	let newOutlineCommand = UIKeyCommand(title: L10n.newOutline,
-										 action: #selector(createOutlineCommand(_:)),
-										 input: "n",
-										 modifierFlags: [.command])
-	
-	let toggleSidebarCommand = UIKeyCommand(title: L10n.toggleSidebar,
-											action: #selector(toggleSidebarCommand(_:)),
-											input: "s",
-											modifierFlags: [.control, .command])
-	
-	let insertRowCommand = UIKeyCommand(title: L10n.addRowAbove,
-										action: #selector(insertRowCommand(_:)),
-										input: "\n",
-										modifierFlags: [.shift])
-	
-	let createRowCommand = UIKeyCommand(title: L10n.addRowBelow,
-										action: #selector(createRowCommand(_:)),
-										input: "\n",
-										modifierFlags: [])
-	
-	let indentRowsCommand = UIKeyCommand(title: L10n.indent,
-										 action: #selector(indentRowsCommand(_:)),
-										 input: "]",
-										 modifierFlags: [.command])
-	
-	let outdentRowsCommand = UIKeyCommand(title: L10n.outdent,
-										  action: #selector(outdentRowsCommand(_:)),
-										  input: "[",
-										  modifierFlags: [.command])
-	
-	let toggleCompleteRowsCommand = UIKeyCommand(title: L10n.complete,
-												 action: #selector(toggleCompleteRowsCommand(_:)),
-												 input: "\n",
-												 modifierFlags: [.command])
-	
-	let completeRowsCommand = UIKeyCommand(title: L10n.complete,
-										   action: #selector(toggleCompleteRowsCommand(_:)),
-										   input: "\n",
-										   modifierFlags: [.command])
-	
-	let uncompleteRowsCommand = UIKeyCommand(title: L10n.uncomplete,
-											 action: #selector(toggleCompleteRowsCommand(_:)),
-											 input: "\n",
-											 modifierFlags: [.command])
-	
-	let createRowNotesCommand = UIKeyCommand(title: L10n.addNote,
-											 action: #selector(createRowNotesCommand(_:)),
-											 input: "-",
-											 modifierFlags: [.control])
-	
-	let deleteRowNotesCommand = UIKeyCommand(title: L10n.deleteNote,
-											 action: #selector(deleteRowNotesCommand(_:)),
-											 input: "-",
-											 modifierFlags: [.control, .shift])
-	
-	let splitRowCommand = UIKeyCommand(title: L10n.splitRow,
-									   action: #selector(splitRowCommand(_:)),
-									   input: "\n",
-									   modifierFlags: [.shift, .alternate])
-	
-	let toggleBoldCommand = UIKeyCommand(title: L10n.bold,
-										 action: #selector(toggleBoldCommand(_:)),
-										 input: "b",
-										 modifierFlags: [.command])
-	
-	let toggleItalicsCommand = UIKeyCommand(title: L10n.italic,
-											action: #selector(toggleItalicsCommand(_:)),
-											input: "i",
-											modifierFlags: [.command])
-	
-	let linkCommand = UIKeyCommand(title: L10n.link,
-								   action: #selector(linkCommand(_:)),
-								   input: "k",
-								   modifierFlags: [.command])
-	
-	let toggleOutlineFilterCommand = UIKeyCommand(title: L10n.hideCompleted,
-												  action: #selector(toggleOutlineFilterCommand(_:)),
-												  input: "h",
-												  modifierFlags: [.shift, .command])
-	
-	let hideCompletedCommand = UIKeyCommand(title: L10n.hideCompleted,
-											action: #selector(toggleOutlineFilterCommand(_:)),
-											input: "h",
-											modifierFlags: [.shift, .command])
-	
-	let showCompletedCommand = UIKeyCommand(title: L10n.showCompleted,
-											action: #selector(toggleOutlineFilterCommand(_:)),
-											input: "h",
-											modifierFlags: [.shift, .command])
-
-	let toggleOutlineHideNotesCommand = UIKeyCommand(title: L10n.hideNotes,
-												  action: #selector(toggleOutlineHideNotesCommand(_:)),
-												  input: "h",
-												  modifierFlags: [.shift, .alternate, .command])
-	
-	let hideNotesCommand = UIKeyCommand(title: L10n.hideNotes,
-											action: #selector(toggleOutlineHideNotesCommand(_:)),
-											input: "h",
-											modifierFlags: [.shift, .alternate, .command])
-	
-	let showNotesCommand = UIKeyCommand(title: L10n.showNotes,
-											action: #selector(toggleOutlineHideNotesCommand(_:)),
-											input: "h",
-											modifierFlags: [.shift, .alternate, .command])
-	
-	let expandAllInOutlineCommand = UIKeyCommand(title: L10n.expandAllInOutline,
-												 action: #selector(expandAllInOutlineCommand(_:)),
-												 input: "9",
-												 modifierFlags: [.control, .command])
-	
-	let collapseAllInOutlineCommand = UIKeyCommand(title: L10n.collapseAllInOutline,
-												   action: #selector(collapseAllInOutlineCommand(_:)),
-												   input: "0",
-												   modifierFlags: [.control, .command])
-	
-	let expandAllCommand = UIKeyCommand(title: L10n.expandAllInRow,
-										action: #selector(expandAllCommand(_:)),
-										input: "9",
-										modifierFlags: [.alternate, .command])
-	
-	let collapseAllCommand = UIKeyCommand(title: L10n.collapseAllInRow,
-										  action: #selector(collapseAllCommand(_:)),
-										  input: "0",
-										  modifierFlags: [.alternate, .command])
-	
-	let expandCommand = UIKeyCommand(title: L10n.expand,
-									 action: #selector(expandCommand(_:)),
-									 input: "9",
-									 modifierFlags: [.command])
-	
-	let collapseCommand = UIKeyCommand(title: L10n.collapse,
-									   action: #selector(collapseCommand(_:)),
-									   input: "0",
-									   modifierFlags: [.command])
-	
-	let deleteCompletedRowsCommand = UIKeyCommand(title: L10n.deleteCompletedRows,
-									   action: #selector(deleteCompletedRowsCommand(_:)),
-									   input: "d",
-									   modifierFlags: [.command])
 	
 	let showReleaseNotesCommand = UICommand(title: L10n.releaseNotes, action: #selector(showReleaseNotes(_:)))
 	
@@ -629,47 +463,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		builder.remove(menu: .openRecent)
 		
 		// Application Menu
-		let appMenu = UIMenu(title: "", options: .displayInline, children: [showPreferences, checkForUpdates])
+        let appMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.showPreferences, checkForUpdates])
 		builder.insertSibling(appMenu, afterMenu: .about)
 		
 		// File Menu
-		let syncMenu = UIMenu(title: "", options: .displayInline, children: [sync])
+        let syncMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.sync])
 		builder.insertChild(syncMenu, atStartOfMenu: .file)
 
-		let importExportMenu = UIMenu(title: "", options: .displayInline, children: [importOPMLCommand, exportMarkdownCommand, exportOPMLCommand])
+        let importExportMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.importOPMLCommand, UIKeyCommand.exportMarkdownCommand, UIKeyCommand.exportOPMLCommand])
 		builder.insertChild(importExportMenu, atStartOfMenu: .file)
 
-		let newWindowMenu = UIMenu(title: "", options: .displayInline, children: [newWindowCommand])
+        let newWindowMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.newWindowCommand])
 		builder.insertChild(newWindowMenu, atStartOfMenu: .file)
 
-		let newItemsMenu = UIMenu(title: "", options: .displayInline, children: [newOutlineCommand])
+        let newItemsMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.newOutlineCommand])
 		builder.insertChild(newItemsMenu, atStartOfMenu: .file)
 
-		let shareMenu = UIMenu(title: "", options: .displayInline, children: [sendCopyCommand])
+        let shareMenu = UIMenu(title: "", options: .displayInline, children: [sendCopyCommand])
 		builder.insertChild(shareMenu, atEndOfMenu: .file)
 
 		// Edit
-		let linkMenu = UIMenu(title: "", options: .displayInline, children: [linkCommand])
+        let linkMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.linkCommand])
 		builder.insertSibling(linkMenu, afterMenu: .standardEdit)
 
 		// Format
 		builder.remove(menu: .format)
-		let formatMenu = UIMenu(title: L10n.format, children: [toggleBoldCommand, toggleItalicsCommand])
+        let formatMenu = UIMenu(title: L10n.format, children: [UIKeyCommand.toggleBoldCommand, UIKeyCommand.toggleItalicsCommand])
 		builder.insertSibling(formatMenu, afterMenu: .edit)
 
-		// View Menu
-		let expandCollapseMenu = UIMenu(title: "",
-										options: .displayInline,
-										children: [expandAllInOutlineCommand, expandAllCommand, expandCommand, collapseAllInOutlineCommand, collapseAllCommand, collapseCommand])
-		builder.insertChild(expandCollapseMenu, atStartOfMenu: .view)
-		let toggleFilterOutlineMenu = UIMenu(title: "", options: .displayInline, children: [toggleOutlineFilterCommand, toggleOutlineHideNotesCommand])
+        // View Menu
+        let expandCollapseMenu = UIMenu(title: "",
+                                        options: .displayInline,
+                                        children: [UIKeyCommand.expandAllInOutlineCommand, UIKeyCommand.expandAllCommand, UIKeyCommand.expandCommand, UIKeyCommand.collapseAllInOutlineCommand, UIKeyCommand.collapseAllCommand, UIKeyCommand.collapseCommand])
+        builder.insertChild(expandCollapseMenu, atStartOfMenu: .view)
+        let toggleFilterOutlineMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleOutlineFilterCommand, UIKeyCommand.toggleOutlineHideNotesCommand])
 		builder.insertChild(toggleFilterOutlineMenu, atStartOfMenu: .view)
-		let toggleSidebarMenu = UIMenu(title: "", options: .displayInline, children: [toggleSidebarCommand])
+        let toggleSidebarMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleSidebarCommand])
 		builder.insertSibling(toggleSidebarMenu, afterMenu: .toolbar)
 		
 		// Outline Menu
-		let completeMenu = UIMenu(title: "", options: .displayInline, children: [toggleCompleteRowsCommand, deleteCompletedRowsCommand, createRowNotesCommand, deleteRowNotesCommand])
-		let mainOutlineMenu = UIMenu(title: "", options: .displayInline, children: [insertRowCommand, createRowCommand, splitRowCommand, indentRowsCommand, outdentRowsCommand])
+        let completeMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.toggleCompleteRowsCommand, UIKeyCommand.deleteCompletedRowsCommand, UIKeyCommand.createRowNotesCommand, UIKeyCommand.deleteRowNotesCommand])
+        let mainOutlineMenu = UIMenu(title: "", options: .displayInline, children: [UIKeyCommand.insertRowCommand, UIKeyCommand.createRowCommand, UIKeyCommand.splitRowCommand, UIKeyCommand.indentRowsCommand, UIKeyCommand.outdentRowsCommand])
 		let outlineMenu = UIMenu(title: L10n.outline, children: [mainOutlineMenu, completeMenu])
 		builder.insertSibling(outlineMenu, afterMenu: .view)
 
